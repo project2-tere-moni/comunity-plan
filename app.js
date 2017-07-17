@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
+const debug = require('debug')(`community-plan:${path.basename(__filename).split('.')[0]}`);
 
 const index = require('./routes/index');
 const user = require('./routes/user');
@@ -14,7 +15,7 @@ const events = require('./routes/event');
 const place = require('./routes/place');
 const {dbURL} = require('./config/db');
 
-mongoose.connect(dbURL);
+mongoose.connect(dbURL).then(() => debug("Connected to DB"));
 
 const app = express();
 
@@ -22,7 +23,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(layouts);
-app.set('layouts', 'layouts/main');
+app.set('layout', 'layouts/main');
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
@@ -34,6 +35,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/vendor/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
+app.use('/vendor/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
 
 app.use('/', index);

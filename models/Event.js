@@ -6,7 +6,7 @@ const EventSchema = Schema({
   description: String,
   place_id: String,
   date: Date,
-  creator_id,
+  creator_id: String,
   picPath: String
 });
 

@@ -1,6 +1,8 @@
 var express = require('express');
 var Event = require('../models/Event');
 var router = express.Router();
+var multer  = require('multer');
+var upload = multer({ dest: './public/event-uploads/' });
 
 // CRUD => R: Retrieve All
 router.get('/', (req, res, next) => {
@@ -14,8 +16,6 @@ router.get('/', (req, res, next) => {
 
 // CRUD => R: Retrieve - Product detail
 router.get('/show/:id', (req, res, next) => {
-  //console.log(req.params);
-  //console.log(req.query);
   Event.findById(req.params.id, (err, e) => {
     if(err){
       console.log(err);
@@ -28,46 +28,55 @@ router.get('/show/:id', (req, res, next) => {
 });
 
 // CRUD => U: Update a product
-router.post('/edit/:id', function(req, res, next) {
-  let {name, price, description, priceUrl} = req.body;
+router.post('/edit/:id', (req, res, next) => {
+  let {name, description, place_id, date, creator_id, picPath} = req.body;
   let updates = {
     name,
-    price,
     description,
-    priceUrl
+    place_id,
+    date,
+    creator_id,
+    picPath
   };
-  console.log(updates);
-  Product.findByIdAndUpdate(req.params.id, updates, (err, p) => {
+  Product.findByIdAndUpdate(req.params.id, updates, (err, e) => {
     if(err){
       console.log(err);
     }
-    res.redirect(`/product/${p._id}`);
+    res.redirect(`/show/${e._id}`);
   });
 });
 
 // CRUD => D: Delete a product
-router.get('/:id/delete', function(req, res, next) {
+router.get('/:id/delete', (req, res, next) =>{
   let id = req.params.id;
-  Product.findByIdAndRemove(id, (err, obj) => {
+  Event.findByIdAndRemove(id, (err, obj) => {
     if (err){ return next(err); }
-    res.redirect("/product");
+    res.redirect("/");
   });
 });
 
+router.get('/new', (req, res, next) => {
+  Event.find({}, (err, e) => {
+    res.render('event/new', {
+      title: 'New Event',
+      events: e
+    });
+  });
+});
 
 // CRUD => C: Create
-router.post('/', function(req, res, next) {
-  console.log(req.body);
-  let p = new Product({
+router.post('/new', upload.single('photo'), (req, res, next) => {
+  let e = new Event({
     name: req.body.name,
-    price: req.body.price,
-    imageUrl: req.body.imageUrl,
-    description: req.body.description
+    description: req.body.description,
+    place_id: req.body.place_id,
+    date: req.body.date,
+    // creator_id: req.user.id,
+    picPath: req.file.path
   });
-  p.save((err, obj) => {
-    res.redirect('/product');
+  e.save((err, obj) => {
+    res.redirect('/');
   });
 });
-
 
 module.exports = router;
