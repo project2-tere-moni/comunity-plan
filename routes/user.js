@@ -44,7 +44,7 @@ router.post('/:id/edit', upload.single('photo'), (req, res, next) => {
           next();
           return err;
         }
-        res.redirect(`/user/profile/${user._id}`);
+        res.redirect(`/user/${user._id}`);
       });
 });
 

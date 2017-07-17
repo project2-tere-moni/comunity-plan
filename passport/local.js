@@ -3,18 +3,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt        = require("bcrypt");
 const User = require('../models/User');
 const path = require('path');
-const debug = require('debug')(`community-plan:${path.basename(__filename).split('.')[0]}`);
+const debug = require('debug')(`comunity-plan:${path.basename(__filename).split('.')[0]}`);
 
-passport.serializeUser((user, cb) => {
-  cb(null, user.id);
-});
-
-passport.deserializeUser((id, cb) => {
-  User.findById(id, (err, user) => {
-    if (err) { return cb(err); }
-    cb(null, user);
-  });
-});
 
 passport.use('local-login', new LocalStrategy((username, password, next) => {
   User.findOne({ username }, (err, user) => {
@@ -40,6 +30,8 @@ passport.use('local-signup', new LocalStrategy(
         User.findOne({
             'username': username
         }, (err, user) => {
+          debug(req.body);
+          debug(req.file);
             if (err){ return next(err); }
 
             if (user) {
@@ -52,16 +44,14 @@ passport.use('local-signup', new LocalStrategy(
                   email,
                   password
                 } = req.body;
-                const picture = {
-                  path: req.file.path
-                };
+                const picPath = `profile-uploads/${req.file.filename}`;
                 const hashPass = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
                 const newUser = new User({
                   name,
                   username,
                   email,
                   password: hashPass,
-                  picture
+                  picPath
                 });
 
                 newUser.save((err) => {

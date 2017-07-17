@@ -4,7 +4,7 @@ const router = express.Router();
 const multer  = require('multer');
 const upload = multer({ dest: './public/event-uploads/' });
 const path = require('path');
-const debug = require('debug')('tumblr-lab:'+path.basename(__filename));
+const debug = require('debug')('comunity-plan:'+path.basename(__filename));
 var Event = require('../models/Event');
 
 // CRUD => R: Retrieve All
@@ -75,7 +75,7 @@ router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, re
     place_id: req.body.place_id,
     date: req.body.date,
     // creator_id: req.user.id,
-    picPath: req.file.path
+    picPath: `event-uploads/${req.file.filename}`
   });
   e.save((err, obj) => {
     res.redirect('/');

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=community-plan:* nodemon ./bin/www",
+    "dev": "DEBUG=comunity-plan:* nodemon ./bin/www",
     "start": "node ./bin/www"
   },
   "dependencies": {

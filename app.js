@@ -10,7 +10,7 @@ const passport      = require("passport");
 const session = require("express-session");
 const flash = require("connect-flash");
 const MongoStore = require('connect-mongo')(session);
-const debug = require('debug')(`community-plan:${path.basename(__filename).split('.')[0]}`);
+const debug = require('debug')(`comunity-plan:${path.basename(__filename).split('.')[0]}`);
 
 const index = require('./routes/index');
 const user = require('./routes/user');
@@ -31,18 +31,6 @@ app.set('layout', 'layouts/main');
 
 app.use(flash());
 
-app.use(session({
-  secret: "communitylab",
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore( { mongooseConnection: mongoose.connection })
-}));
-
-require('./passport/config');
-require('./passport/local');
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
@@ -57,6 +45,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/vendor/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 app.use('/vendor/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
+app.use(session({
+  secret: "communitylab",
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection })
+}));
+
+require('./passport/config');
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/user', user);
