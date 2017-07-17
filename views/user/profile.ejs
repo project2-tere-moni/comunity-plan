@@ -1,0 +1,18 @@
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+          <img src="<%= user.picPath %>" alt="profilePicture" class="img-thumbnail">
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <blockquote>
+              <p><%= user.username %></p>
+              <p><%= user.name %></p>
+          </blockquote>
+          <p> <i class="glyphicon glyphicon-envelope"><%= user.email %></i></p>
+      </div>
+    </div>
+</div>
