@@ -1,8 +1,11 @@
-var express = require('express');
+const express = require('express');
+const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
+const router = express.Router();
+const multer  = require('multer');
+const upload = multer({ dest: './public/event-uploads/' });
+const path = require('path');
+const debug = require('debug')('tumblr-lab:'+path.basename(__filename));
 var Event = require('../models/Event');
-var router = express.Router();
-var multer  = require('multer');
-var upload = multer({ dest: './public/event-uploads/' });
 
 // CRUD => R: Retrieve All
 router.get('/', (req, res, next) => {
@@ -28,7 +31,7 @@ router.get('/show/:id', (req, res, next) => {
 });
 
 // CRUD => U: Update a product
-router.post('/edit/:id', (req, res, next) => {
+router.post('/edit/:id', ensureLoggedIn('/login'), (req, res, next) => {
   let {name, description, place_id, date, creator_id, picPath} = req.body;
   let updates = {
     name,
@@ -38,7 +41,7 @@ router.post('/edit/:id', (req, res, next) => {
     creator_id,
     picPath
   };
-  Product.findByIdAndUpdate(req.params.id, updates, (err, e) => {
+  Event.findByIdAndUpdate(req.params.id, updates, (err, e) => {
     if(err){
       console.log(err);
     }
@@ -65,7 +68,7 @@ router.get('/new', (req, res, next) => {
 });
 
 // CRUD => C: Create
-router.post('/new', upload.single('photo'), (req, res, next) => {
+router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, res, next) => {
   let e = new Event({
     name: req.body.name,
     description: req.body.description,

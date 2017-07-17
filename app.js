@@ -6,6 +6,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const mongoose     = require('mongoose');
+const passport      = require("passport");
+const session = require("express-session");
+const flash = require("connect-flash");
+const MongoStore = require('connect-mongo')(session);
 const debug = require('debug')(`community-plan:${path.basename(__filename).split('.')[0]}`);
 
 const index = require('./routes/index');
@@ -24,6 +28,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(layouts);
 app.set('layout', 'layouts/main');
+
+app.use(flash());
+
+app.use(session({
+  secret: "communitylab",
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection })
+}));
+
+require('./passport/config');
+require('./passport/local');
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
