@@ -33,10 +33,16 @@
       <span class="light-text"><%= events.timeRemaining.unit  %> to finish.</span><br>
       <div id="people-in" class="light-text">
         People who voted this event:
+        <% for (i=0; i < voting.length; i++) { %>
+          <p>
+            <%= voting[i].user_id.username %>
+          </p>
+          <% } %>
       </div>
     </div>
   </div>
 </div>
+<a class="btn backer-btn" href="/event/edit/<%= events._id %>">Edit this event</a><br>
 <a class="btn backer-btn" href="/event">View all events</a>
 </div>
 <script type="text/javascript">
