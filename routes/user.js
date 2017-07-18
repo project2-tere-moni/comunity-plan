@@ -7,11 +7,11 @@ var upload = multer({ dest: './public/event-uploads/' });
 /* GET home page. */
 router.get('/:id', (req, res, next) => {
   User.findById(req.params.id, (err, user) => {
-      console.log(user);
       if (err) {
           next();
           return err;
         } else {
+          console.log(user);
           res.render('user/profile', {user: user});
         }
     });

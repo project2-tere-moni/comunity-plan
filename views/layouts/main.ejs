@@ -24,9 +24,13 @@
 					<li role="presentation" class="clickeable"><a href="/place">Places</a></li>
           <li role="presentation" class="clickeable"><a href="/event">Events</a></li>
           <li role="presentation" class="clickeable"><a href="/event/new">Create an event</a></li>
-					<li role="presentation" class="clickeable"><a href="/user">My profile</a></li>
+          <% if(typeof session != 'undefined'){ %>
+          <li role="presentation" class="clickeable"><a href="/user/<%= user._id %>">My profile</a></li>
+          <li role="presentation" class="clickeable"><a href="/logout">Logout</a></li>
+        <% } else { %>
           <li role="presentation" class="clickeable"><a href="/login">Login</a></li>
           <li role="presentation" class="clickeable"><a href="/signup">Signup</a></li>
+        <% } %>
 				</ul>
 			</div>
 		</div>
