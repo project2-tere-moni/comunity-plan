@@ -23,19 +23,25 @@
     </div>
     <div class="col-sm-4">
       <progress value="<%= events.totalPledged %>" max="<%= events.goal %>"></progress>
-      <h2><%= events.totalPledged %></h2><br>
+      <h2 class="total"><%= events.totalPledged %></h2><br>
       <span class="light-text">
             pledged of
             <%= events.goal %></span> goal
       </span><br>
+      <button id='vote' class="btn" name="vote">Vote for this event</button>
       <strong class="large-strong"><h2><%= events.timeRemaining.days %></h2></strong><br>
-      <span class="light-text"><%= events.timeRemaining.unit  %> to finish.</span>
-      <button class="vote" name="vote"></button>
+      <span class="light-text"><%= events.timeRemaining.unit  %> to finish.</span><br>
+      <div class="people-in">
 
       </div>
     </div>
   </div>
-  <a class="btn backer-btn" href="/event">View all events</a>
-
-
 </div>
+<a class="btn backer-btn" href="/event">View all events</a>
+</div>
+<script type="text/javascript">
+  var eventInfo = <%- JSON.stringify({
+  currentEvent: events,
+  currentUser: user
+  }) %>;
+</script>

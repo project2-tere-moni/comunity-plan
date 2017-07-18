@@ -21,5 +21,4 @@ EventSchema.virtual('timeRemaining').get(function () {
 
 const Event = mongoose.model('Event', EventSchema);
 
-
 module.exports = Event;

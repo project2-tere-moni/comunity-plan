@@ -26,7 +26,8 @@ router.get('/show/:id', (req, res, next) => {
     }
     res.render('event/show', {
       title: 'Event Details',
-      events: e
+      events: e,
+      user: req.user
     });
   });
 });

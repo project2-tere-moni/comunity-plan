@@ -12,7 +12,6 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const MongoStore = require('connect-mongo')(session);
 const moment = require('moment');
-moment().format();
 const debug = require('debug')(`comunity-plan:${path.basename(__filename).split('.')[0]}`);
 
 const index = require('./routes/index');
@@ -20,6 +19,7 @@ const user = require('./routes/user');
 const auth = require('./routes/auth');
 const events = require('./routes/event');
 const place = require('./routes/place');
+const voting = require('./routes/voting');
 const dbURL = process.env.MONGO_DB_URL;
 
 mongoose.connect(dbURL).then(() => debug("Connected to DB"));
@@ -70,6 +70,7 @@ app.use('/user', user);
 app.use('/event', events);
 app.use('/place', place);
 app.use('/', auth);
+app.use('/voting', voting)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
