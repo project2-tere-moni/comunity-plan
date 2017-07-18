@@ -10,7 +10,6 @@ router.post('/', (req, res, next) => {
   voteInfo.save( (err, obj) => {
     console.log(obj);
   });
-  console.log('he llegado', req.body.userId, req.body.eventId);
 });
 
 module.exports = router;
