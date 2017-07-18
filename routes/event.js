@@ -25,7 +25,7 @@ router.get('/show/:id', (req, res, next) => {
     }
     res.render('event/show', {
       title: 'Chosen event',
-      event: e
+      events: e
     });
   });
 });
@@ -50,7 +50,7 @@ router.post('/edit/:id', ensureLoggedIn('/login'), (req, res, next) => {
 });
 
 // CRUD => D: Delete a product
-router.get('/:id/delete', (req, res, next) =>{
+router.get('/:id/delete', ensureLoggedIn('/login'), (req, res, next) =>{
   let id = req.params.id;
   Event.findByIdAndRemove(id, (err, obj) => {
     if (err){ return next(err); }
@@ -58,7 +58,7 @@ router.get('/:id/delete', (req, res, next) =>{
   });
 });
 
-router.get('/new', (req, res, next) => {
+router.get('/new', ensureLoggedIn('/login'), (req, res, next) => {
   Event.find({}, (err, e) => {
     res.render('event/new', {
       title: 'New Event',
@@ -74,7 +74,7 @@ router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, re
     description: req.body.description,
     place_id: req.body.place_id,
     date: req.body.date,
-    // creator_id: req.user.id,
+    creator_id: req.user._id,
     picPath: `event-uploads/${req.file.filename}`
   });
   e.save((err, obj) => {

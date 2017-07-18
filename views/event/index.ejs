@@ -1,1 +1,15 @@
 <h1><%= title %></h1>
+
+<div class="row">
+  <div class="col-sm-6 col-md-4 trip-panel" >
+    <% for (i=0; i < events.length; i++) { %>
+      <div class="thumbnail">
+        <img src="<%= events[i].picPath %>" alt="">
+        <div class="caption">
+          <h3><%= events[i].name %></h3>
+          <p><%= events[i].description %></p>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
