@@ -24,28 +24,38 @@ router.get('/show/:id', (req, res, next) => {
       console.log(err);
     }
     res.render('event/show', {
-      title: 'Chosen event',
+      title: 'Event Details',
       events: e
     });
   });
 });
 
 // CRUD => U: Update a product
-router.post('/edit/:id', ensureLoggedIn('/login'), (req, res, next) => {
-  let {name, description, place_id, date, creator_id, picPath} = req.body;
-  let updates = {
-    name,
-    description,
-    place_id,
-    date,
-    creator_id,
-    picPath
-  };
-  Event.findByIdAndUpdate(req.params.id, updates, (err, e) => {
+router.get('/edit/:id', (req, res, next) => {
+  Event.findById(req.params.id, (err, e) => {
     if(err){
       console.log(err);
     }
-    res.redirect(`/show/${e._id}`);
+    res.render('event/edit', {
+      title: 'Edit event',
+      events: e
+    });
+  });
+});
+
+router.post('/edit/:id', [ensureLoggedIn('/login'),upload.single('photo')], (req, res, next) => {
+  let updates = {
+    name: req.body.name,
+    description: req.body.description,
+    place_id: req.body.place_id,
+    deadline: req.body.deadline,
+    creator_id: req.user._id,
+    goal: req.body.goal,
+  };
+  if (req.file) updates.picPath = `event-uploads/${req.file.filename}`;
+  Event.findByIdAndUpdate(req.params.id, updates, (err, e) => {
+    if(err) console.log(err);
+    res.redirect(`/event/show/${e._id}`);
   });
 });
 
@@ -73,12 +83,13 @@ router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, re
     name: req.body.name,
     description: req.body.description,
     place_id: req.body.place_id,
-    date: req.body.date,
+    deadline: req.body.deadline,
     creator_id: req.user._id,
-    picPath: `event-uploads/${req.file.filename}`
+    picPath: `event-uploads/${req.file.filename}`,
+    goal: req.body.goal,
   });
   e.save((err, obj) => {
-    res.redirect('/');
+    res.redirect(`/event/show/${e._id}`);
   });
 });
 
