@@ -8,6 +8,7 @@ const debug = require('debug')(`comunity-plan:${path.basename(__filename).split(
 
 passport.use('local-login', new LocalStrategy((username, password, next) => {
   User.findOne({ username }, (err, user) => {
+    debug(user);
     if (err) {
       return next(err);
     }

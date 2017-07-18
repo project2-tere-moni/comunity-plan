@@ -86,7 +86,7 @@ router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, re
     place_id: req.body.place_id,
     deadline: req.body.deadline,
     creator_id: req.user._id,
-    picPath: `event-uploads/${req.file.filename}`,
+    picPath: (req.file) ? `event-uploads/${req.file.filename}` : '',
     goal: req.body.goal,
   });
   e.save((err, obj) => {
