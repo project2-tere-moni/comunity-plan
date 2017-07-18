@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express      = require('express');
 const path         = require('path');
 const favicon      = require('serve-favicon');
@@ -17,7 +18,7 @@ const user = require('./routes/user');
 const auth = require('./routes/auth');
 const events = require('./routes/event');
 const place = require('./routes/place');
-const {dbURL} = require('./config/db');
+const dbURL = process.env.MONGO_DB_URL;
 
 mongoose.connect(dbURL).then(() => debug("Connected to DB"));
 

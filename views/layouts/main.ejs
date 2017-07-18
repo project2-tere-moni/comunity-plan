@@ -21,11 +21,13 @@
 			</div>
 			<div class="col-md-8 submenu">
 				<ul class="nav nav-pills">
+          <li role="presentation" class="clickeable"><a href="/">Home</a></li>
 					<li role="presentation" class="clickeable"><a href="/place">Places</a></li>
           <li role="presentation" class="clickeable"><a href="/event">Events</a></li>
           <li role="presentation" class="clickeable"><a href="/event/new">Create an event</a></li>
           <% if(user){ %>
-            <li role="presentation" class="clickeable"><a href="/user/<%= user._id %>">My profile</a></li>
+            <li role="presentation" class="clickeable"><a href="/user/<%= user._id %>">My Profile</a></li>
+            <li role="presentation" class="clickeable"><a href="/user/<%= user._id %>/edit">Edit Profile</a></li>
             <li role="presentation" class="clickeable"><a href="/logout">Logout</a></li>
         <% } else { %>
           <li role="presentation" class="clickeable"><a href="/login">Login</a></li>
@@ -38,5 +40,4 @@
 	</header>
   <%- body %>
 </body>
-
 </html>

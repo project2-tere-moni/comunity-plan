@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const User = require('../models/User');
 var multer  = require('multer');
-var upload = multer({ dest: './public/event-uploads/' });
+var upload = multer({ dest: './public/profile-uploads/' });
 
 /* GET home page. */
 router.get('/:id', (req, res, next) => {
@@ -30,7 +30,8 @@ router.get('/:id/edit', (req, res, next) => {
 });
 
 router.post('/:id/edit', upload.single('photo'), (req, res, next) => {
-  let {username, name, password, email, picPath} = req.body;
+  let {username, name, password, email} = req.body;
+  let picPath = `profile-uploads/${req.file.filename}`;
       let edits = {
         username,
         name,

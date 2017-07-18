@@ -6,8 +6,6 @@ const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 const debug = require('debug')(`community-plan:${path.basename(__filename).split('.')[0]}`);
 const multer  = require('multer');
 const upload = multer({ dest: './public/profile-uploads/' });
-// const bcrypt = require("bcrypt");
-// const bcryptSalt = 10;
 const User = require("../models/User");
 
 
