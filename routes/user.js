@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const User = require('../models/User');
+const Event = require('../models/Event');
 var multer  = require('multer');
 var upload = multer({ dest: './public/profile-uploads/' });
 
@@ -11,8 +12,13 @@ router.get('/:id', (req, res, next) => {
           next();
           return err;
         } else {
+        Event.find({creator_id: user._id}, (err, events) => {
           console.log(user);
-          res.render('user/profile', {user: user});
+          res.render('user/profile', {
+            user: user,
+            events: events
+          });
+        });
         }
     });
 });

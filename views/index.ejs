@@ -2,3 +2,27 @@
 <% if(user){ %>
 <p>Welcome <%= user.name %></p>
 <% } %>
+
+<div class="row">
+  <h1><a href="/event">Events</a></h1>
+  <div class="col-sm-6 col-md-4 trip-panel" >
+    <% for (i=0; i < events.length; i++) { %>
+      <div class="thumbnail">
+        <img src="<%= events[i].picPath %>" alt="">
+        <div class="caption">
+          <h3><a href="/event/show/<%= events[i]._id %>"><%= events[i].name %></a></h3>
+          <p><%= events[i].description %></p>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<h1><a href="/place">Places Availables</a></h1>
+<div id="map-intro"></div>
+
+<script type="text/javascript">
+ var myPlaces = <%- JSON.stringify(places) %>;
+ </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiaRwHqB7k_4QpmPWiPdXWAAutNW_wiC4"></script>
+<script type="text/javascript" src="/javascripts/place-intro.js"></script>
