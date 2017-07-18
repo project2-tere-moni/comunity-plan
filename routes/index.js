@@ -1,19 +1,23 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 var Event = require('../models/Event');
 var Place = require('../models/Place');
 
 router.get('/', (req, res, next) => {
-  Event.find({}, (err, events) => {
-    Place.find({}, (err, places) => {
-      res.render('index', {
-        title: "index",
-        user: req.user,
-        events: events,
-        places: places
-      });
-    });
-    });
+  Event.find()
+    .exec()
+    .then(events => {
+      Place.find()
+        .exec()
+        .then(places => {
+          res.render('index', {
+            title: "index",
+            events: events,
+            places: places
+          });
+        });
+    })
+    .catch(e => next(e));
 });
 
 module.exports = router;

@@ -4,15 +4,12 @@ const Place = require('../models/Place');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  Place.find({}, (err, places) => {
-      console.log(places);
-      if (err) {
-          next();
-          return err;
-        } else {
-          res.render('place/index', {places: places});
-        }
-    });
+    Place.find()
+         .exec()
+         .then(places => {
+           res.render('place/index', {places: places});
+         })
+         .catch(e => nect(e));
 });
 
 module.exports = router;
