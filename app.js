@@ -11,6 +11,8 @@ const passport      = require("passport");
 const session = require("express-session");
 const flash = require("connect-flash");
 const MongoStore = require('connect-mongo')(session);
+const moment = require('moment');
+moment().format();
 const debug = require('debug')(`comunity-plan:${path.basename(__filename).split('.')[0]}`);
 
 const index = require('./routes/index');

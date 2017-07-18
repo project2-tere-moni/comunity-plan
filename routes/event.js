@@ -4,6 +4,7 @@ const router = express.Router();
 const multer  = require('multer');
 const upload = multer({ dest: './public/event-uploads/' });
 const path = require('path');
+const moment = require('moment');
 const debug = require('debug')('comunity-plan:'+path.basename(__filename));
 var Event = require('../models/Event');
 
