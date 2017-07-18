@@ -6,7 +6,7 @@
       <div class="thumbnail">
         <img src="<%= events[i].picPath %>" alt="">
         <div class="caption">
-          <h3><%= events[i].name %></h3>
+          <h3><a href="/event/show/<%= events[i]._id %>"><%= events[i].name %></a></h3>
           <p><%= events[i].description %></p>
         </div>
       </div>
