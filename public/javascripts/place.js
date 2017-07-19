@@ -16,7 +16,7 @@ $(document).ready(function(){
      var contentString = '<div id="content">'+
              '<div id="siteNotice">'+
              '</div>'+
-             `<h1 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h1>`+
+             `<h3 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h3>`+
              '<div id="bodyContent">'+
              `<img src="${place.picPath}" alt="" width="80">`+
              `<p>${place.description}</p>`+
@@ -31,6 +31,4 @@ $(document).ready(function(){
      pin.addListener('click', ()=>{infowindow.open(map, pin);});
      markers.push(pin);
    });
-
-
 });
