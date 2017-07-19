@@ -8,6 +8,7 @@ const multer = require('multer');
 const upload = multer({
   dest: './public/event-uploads/'
 });
+const {checkCreator} = require('../config/middlewares');
 const path = require('path');
 const moment = require('moment');
 const debug = require('debug')('comunity-plan:' + path.basename(__filename));
@@ -37,20 +38,17 @@ router.get('/show/:id', (req, res, next) => {
         .populate('user_id')
         .exec(function(err, voting) {
           if (err) return handleError(err);
-          console.log(voting);
-          console.log(voting[0].user_id.username);
           res.render('event/show', {
             title: 'Event Details',
             events: events,
             voting: voting
           });
         });
-
     })
     .catch(e => next(e));
 });
 
-router.get('/edit/:id', (req, res, next) => {
+router.get('/edit/:id',[ensureLoggedIn('/login'), checkCreator], (req, res, next) => {
   Event.findById(req.params.id)
     .exec()
     .then(events => {
@@ -69,12 +67,12 @@ router.post('/edit/:id', [ensureLoggedIn('/login'), upload.single('photo')], (re
     place_id: req.body.place_id,
     deadline: req.body.deadline,
     creator_id: req.user._id,
-    goal: req.body.goal,
+    goal: req.body.goal
   };
 
   if (req.file) updates.picPath = `event-uploads/${req.file.filename}`;
 
-  Event.findByIdAndUpdate(req.params.id)
+  Event.findByIdAndUpdate(req.params.id, updates)
     .exec()
     .then(events => {
       res.redirect(`/event/show/${events._id}`);
@@ -82,7 +80,7 @@ router.post('/edit/:id', [ensureLoggedIn('/login'), upload.single('photo')], (re
     .catch(e => next(e));
 });
 
-router.get('/:id/delete', ensureLoggedIn('/login'), (req, res, next) => {
+router.get('/delete/:id', [ensureLoggedIn('/login'), checkCreator], (req, res, next) => {
   Event.findByIdAndRemove(req.params.id)
     .exec()
     .then(events => {

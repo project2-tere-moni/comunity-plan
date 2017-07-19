@@ -41,7 +41,7 @@ router.post('/:id/edit', upload.single('photo'), (req, res, next) => {
         picPath
       };
 
-      User.findByIdAndUpdate(req.params.id)
+      User.findByIdAndUpdate(req.params.id, edits)
           .exec()
           .then(user => {
             res.redirect(`/user/${user._id}`);

@@ -42,7 +42,10 @@
     </div>
   </div>
 </div>
+  <% if((user._id).toString() == (events.creator_id).toString()){ %>
 <a class="btn backer-btn" href="/event/edit/<%= events._id %>">Edit this event</a><br>
+<a class="btn backer-btn" href="/event/delete/<%= events._id %>">Delete this event</a><br>
+  <% } %>
 <a class="btn backer-btn" href="/event">View all events</a>
 </div>
 <script type="text/javascript">
