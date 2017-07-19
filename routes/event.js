@@ -12,8 +12,8 @@ const {checkCreator} = require('../config/middlewares');
 const path = require('path');
 const moment = require('moment');
 const debug = require('debug')('comunity-plan:' + path.basename(__filename));
-var Event = require('../models/Event');
-var Vote = require('../models/Vote');
+let Event = require('../models/Event');
+let Vote = require('../models/Vote');
 
 
 router.get('/', (req, res, next) => {
@@ -29,6 +29,16 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/show/:id', (req, res, next) => {
+  let voted;
+  Vote.findOne({event_id : req.params.id, user_id : req.user._id })
+  .exec()
+  .then(vote => {
+    console.log(vote);
+    if(vote) {
+      voted = true;
+    } else {
+      voted = false;
+    }
   Event.findById(req.params.id)
     .exec()
     .then(events => {
@@ -38,18 +48,16 @@ router.get('/show/:id', (req, res, next) => {
         .populate('user_id')
         .exec(function(err, voting) {
           if (err) return handleError(err);
-<<<<<<< HEAD
-=======
-          console.log(voting.length);
->>>>>>> 29bfac02519d5768a7fd0ebf20db1946a3fbe55c
           res.render('event/show', {
             title: 'Event Details',
             events: events,
-            voting: voting
+            voting: voting,
+            voted: voted
           });
         });
     })
     .catch(e => next(e));
+  });
 });
 
 router.get('/edit/:id',[ensureLoggedIn('/login'), checkCreator], (req, res, next) => {
