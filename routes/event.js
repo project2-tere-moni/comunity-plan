@@ -36,20 +36,16 @@ router.get('/show/:id', (req, res, next) => {
           event_id: events._id
         })
         .populate('user_id')
-        .exec(function(err, voting) {
-          if (err) return handleError(err);
-<<<<<<< HEAD
-=======
-          console.log(voting.length);
->>>>>>> 29bfac02519d5768a7fd0ebf20db1946a3fbe55c
+        .exec()
+        .then(voting => {
           res.render('event/show', {
             title: 'Event Details',
             events: events,
             voting: voting
           });
         });
-    })
-    .catch(e => next(e));
+      })
+      .catch(e => next(e));
 });
 
 router.get('/edit/:id',[ensureLoggedIn('/login'), checkCreator], (req, res, next) => {

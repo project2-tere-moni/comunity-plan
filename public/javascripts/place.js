@@ -16,15 +16,16 @@ $(document).ready(function(){
      var contentString = '<div id="content">'+
              '<div id="siteNotice">'+
              '</div>'+
-             `<h1 id="firstHeading" class="firstHeading">${place.place_id}</h1>`+
+             `<h1 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h1>`+
              '<div id="bodyContent">'+
-             `<img src="${place.picPath}.png" alt="" width="80">`+
-             `<span>${place.description}</span>`+
+             `<img src="${place.picPath}" alt="" width="80">`+
+             `<p>${place.description}</p>`+
              '</div>'+
              '</div>';
 
      var infowindow = new google.maps.InfoWindow({
-       content: contentString
+       content: contentString,
+       maxWidth: 200
      });
      var pin = new google.maps.Marker({ position, map, place_id  });
      pin.addListener('click', ()=>{infowindow.open(map, pin);});

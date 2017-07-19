@@ -2,8 +2,9 @@ const Place = require('../models/Place');
 const mongoose = require('mongoose');
 const dbURL = process.env.MONGO_DB_URL;
 
-mongoose.connect(dbURL)
+mongoose.connect('mongodb://localhost/comunity-plan')
   .then(() => {
+    console.log('seed place');
     let places = [
       {
         place_id: 1,

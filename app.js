@@ -70,7 +70,7 @@ app.use('/user', user);
 app.use('/event', events);
 app.use('/place', place);
 app.use('/', auth);
-app.use('/voting', voting)
+app.use('/voting', voting);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

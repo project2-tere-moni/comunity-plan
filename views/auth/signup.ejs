@@ -25,3 +25,7 @@
       </form>
     </div>
   </div>
+
+  <% if (typeof errorMessage !== "undefined") { %>
+     <div class="error-message"><%= errorMessage %></div>
+   <% } %>

@@ -18,7 +18,7 @@ $(document).ready(function(){
              '</div>'+
              `<h1 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h1>`+
              '<div id="bodyContent">'+
-             `<img src="${place.picPath}.png" alt="" width="80">`+
+             `<img src="${place.picPath}" alt="" width="80">`+
              `<span>${place.description}</span>`+
              '</div>'+
              '</div>';

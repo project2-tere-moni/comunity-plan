@@ -17,15 +17,14 @@ router.get('/:id', (req, res, next) => {
                      user_id: user._id
                    })
                    .populate('event_id')
-                   .exec(function(err, voting) {
-                     if (err) return handleError(err);
-                     console.log(voting);
-                 res.render('user/profile', {
-                   user: user,
-                   events: events,
-                   voting: voting
-                 });
-               });
+                   .exec()
+                   .then(voting => {
+                     res.render('user/profile', {
+                       user: user,
+                       events: events,
+                       voting: voting
+                     });
+                });
             });
         })
         .catch(e => next(e));
