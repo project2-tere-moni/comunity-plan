@@ -78,7 +78,7 @@ router.post('/edit/:id', [ensureLoggedIn('/login'), upload.single('photo')], (re
     place_id: req.body.place_id,
     deadline: req.body.deadline,
     creator_id: req.user._id,
-    goal: req.body.goal
+    goal: 50
   };
 
   if (req.file) updates.picPath = `/event-uploads/${req.file.filename}`;
@@ -120,7 +120,7 @@ router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, re
     deadline: req.body.deadline,
     creator_id: req.user._id,
     picPath: (req.file) ? `/event-uploads/${req.file.filename}` : '/images/default.png',
-    goal: req.body.goal,
+    goal: 50,
   });
   newEvent.save()
     .then(() => {

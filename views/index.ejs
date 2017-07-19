@@ -1,25 +1,40 @@
-<h1><%= title %></h1>
+
 <% if(user){ %>
-<p>Welcome <%= user.name %></p>
+<h1>Welcome <%= user.name %></h1>
 <% } %>
 
-<div class="row">
-  <h1><a href="/event">Events</a></h1>
-  <div class="col-sm-6 col-md-4 trip-panel" >
-    <% for (i=0; i < events.length; i++) { %>
-      <div class="thumbnail">
-        <img src="<%= events[i].picPath %>" alt="">
-        <div class="caption">
-          <h3><a href="/event/show/<%= events[i]._id %>"><%= events[i].name %></a></h3>
-          <p><%= events[i].description %></p>
+<div class="jumbotron">
+  <h1>Welcome</h1>
+  <p>This is the new platform for the comunity </p>
+  <p>to do those cultural events so everyone </p>
+  <p>can benefit from them, this can be done </p>
+  <p>in our available places listed below</p>
+  <p><a class="btn btn-primary btn-lg" href="/event/new" role="button">Create your event now!</a></p>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 trip-panel" >
+    <h1><a href="/event">Events</a></h1>
+      <% for (i=0; i < events.length; i++) { %>
+        <div class="col-md-6 thumbnail">
+          <img src="<%= events[i].picPath %>" alt="" class="imgEventIndex">
+          <div class="caption">
+            <h3><a href="/event/show/<%= events[i]._id %>"><%= events[i].name %></a></h3>
+            <p><%= events[i].description %></p>
+          </div>
         </div>
-      </div>
-    <% } %>
+      <% } %>
+    </div>
+    <div class="col-md-6">
+      <h1><a href="/place">Places Availables</a></h1>
+      <div id="map-intro"></div>
+    </div>
   </div>
 </div>
 
-<h1><a href="/place">Places Availables</a></h1>
-<div id="map-intro"></div>
+
+
 
 <script type="text/javascript">
  var myPlaces = <%- JSON.stringify(places) %>;
