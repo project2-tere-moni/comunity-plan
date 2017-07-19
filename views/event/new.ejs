@@ -3,23 +3,35 @@
     <form action="/event/new" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Event name</label>
-        <input type="text" name="name" class="form-control">
+        <input type="text" name="name" class="form-control" autofocus>
       </div>
       <div class="form-group">
         <label for="description">Description</label>
         <textarea type="text" name="description" class="form-control"></textarea>
       </div>
       <div class="form-group">
-        <label for="place_id">Place</label>
-        <input type="text" name="place_id" class="form-control">
+      <label for="place_id">Place</label> <br>
+      <input list="place" name="place_id" placeholder="Choose a place">
+      <datalist id="place" class="dropdown">
+        <option value="Pista">
+        <option value="Paseo de la Chopera">
+        <option value="Rosa Jardón">
+        <option value="Rafael Finat">
+        <option value="Mayor">
+        <option value="Señores de Luzon">
+        <option value="Ribera de Curtidores">
+        <option value="Guatemala">
+        <option value="Eduardo Morales">
+        <option value="Hermanos Álvarez Quintero">
+      </datalist>
       </div>
       <div class="form-group">
         <label for="deadline">Deadline</label>
-        <input type="date" name="deadline" class="form-control">
+        <input type="date" name="deadline" class="form-control" value="2017-08-04">
       </div>
       <div class="form-group">
         <label for="goal">Goal</label>
-        <input type="number" name="goal" class="form-control">
+        <input type="number" name="goal" class="form-control" value=50 disabled>
       </div>
       <div class="form-group">
         <label for="picPath">Upload a photo</label>

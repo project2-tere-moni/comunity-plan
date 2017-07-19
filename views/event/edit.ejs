@@ -7,15 +7,27 @@
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea type="text" name="description" class="form-control" value="<%= events.description %>"></textarea>
+        <textarea type="text" name="description" class="form-control" placeholder="<%= events.description %>"></textarea>
       </div>
       <div class="form-group">
-        <label for="place_id">Place</label>
-        <input type="text" name="place_id" class="form-control" value="<%= events.place_id %>">
+      <label for="place_id">Place</label> <br>
+      <input list="place" name="place_id" placeholder="<%= events.place_id %>">
+      <datalist id="place" class="dropdown">
+        <option value="Pista">
+        <option value="Paseo de la Chopera">
+        <option value="Rosa Jardón">
+        <option value="Rafael Finat">
+        <option value="Mayor">
+        <option value="Señores de Luzon">
+        <option value="Ribera de Curtidores">
+        <option value="Guatemala">
+        <option value="Eduardo Morales">
+        <option value="Hermanos Álvarez Quintero">
+      </datalist>
       </div>
       <div class="form-group">
         <label for="deadline">Deadline</label>
-        <input type="date" name="deadline" class="form-control" value="<%= events.deadline %>">
+        <input type="date" name="deadline" class="form-control" placeholder="<%= events.deadline %>">
       </div>
       <div class="form-group">
         <label for="goal">Goal</label>
