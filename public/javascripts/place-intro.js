@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var map = new google.maps.Map(document.getElementById('map-intro'), {
-      zoom: 15,
+      zoom: 11,
       center: {lat: 40.417080, lng: -3.703612}
     });
     var geocoder = new google.maps.Geocoder();
@@ -16,7 +16,7 @@ $(document).ready(function(){
      var contentString = '<div id="content">'+
              '<div id="siteNotice">'+
              '</div>'+
-             `<h1 id="firstHeading" class="firstHeading">${place.place_id}</h1>`+
+             `<h1 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h1>`+
              '<div id="bodyContent">'+
              `<img src="${place.picPath}.png" alt="" width="80">`+
              `<span>${place.description}</span>`+

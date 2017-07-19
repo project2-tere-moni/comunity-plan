@@ -19,7 +19,7 @@
 
   <div class="row">
     <div class="col-sm-8">
-      <img src="/<%= events.picPath %>" alt="placePicture" class="img-thumbnail">
+      <img src="<%= events.picPath %>" alt="placePicture" class="img-thumbnail">
     </div>
     <div class="col-sm-4">
       <progress value="<%= events.totalPledged %>" max="<%= events.goal %>"></progress>
@@ -31,6 +31,7 @@
       <button id='vote' class="btn" name="vote">Vote for this event</button>
       <strong class="large-strong"><h2><%= events.timeRemaining.days %></h2></strong><br>
       <span class="light-text"><%= events.timeRemaining.unit  %> to finish.</span><br>
+      <% if(voting.length !== 0) {%>
       <div id="people-in" class="light-text">
         People who voted this event:
         <% for (i=0; i < voting.length; i++) { %>
@@ -39,6 +40,7 @@
           </p>
           <% } %>
       </div>
+      <% } %>
     </div>
   </div>
 </div>
