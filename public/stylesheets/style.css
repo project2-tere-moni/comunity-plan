@@ -19,3 +19,7 @@ a {
   width: 50%;
   height: 200px;
 }
+
+.btn-default {
+  background-image: none;
+}
