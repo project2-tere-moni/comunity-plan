@@ -38,6 +38,10 @@ router.get('/show/:id', (req, res, next) => {
         .populate('user_id')
         .exec(function(err, voting) {
           if (err) return handleError(err);
+<<<<<<< HEAD
+=======
+          console.log(voting.length);
+>>>>>>> 29bfac02519d5768a7fd0ebf20db1946a3fbe55c
           res.render('event/show', {
             title: 'Event Details',
             events: events,
@@ -70,7 +74,7 @@ router.post('/edit/:id', [ensureLoggedIn('/login'), upload.single('photo')], (re
     goal: req.body.goal
   };
 
-  if (req.file) updates.picPath = `event-uploads/${req.file.filename}`;
+  if (req.file) updates.picPath = `/event-uploads/${req.file.filename}`;
 
   Event.findByIdAndUpdate(req.params.id, updates)
     .exec()
@@ -108,7 +112,7 @@ router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, re
     place_id: req.body.place_id,
     deadline: req.body.deadline,
     creator_id: req.user._id,
-    picPath: (req.file) ? `event-uploads/${req.file.filename}` : '/images/empty-profile.png',
+    picPath: (req.file) ? `/event-uploads/${req.file.filename}` : '/images/default.png',
     goal: req.body.goal,
   });
   newEvent.save()

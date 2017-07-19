@@ -45,7 +45,7 @@ passport.use('local-signup', new LocalStrategy(
                   email,
                   password
                 } = req.body;
-                const picPath = `profile-uploads/${req.file.filename}`;
+                const picPath = (req.file) ? `/profile-uploads/${req.file.filename}` : '/images/empty-profile.png';
                 const hashPass = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
                 const newUser = new User({
                   name,

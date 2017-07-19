@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-2 col-md-2">
-          <img src="/<%= user.picPath %>" alt="profilePicture" class="img-thumbnail">
+          <img src="<%= user.picPath %>" alt="profilePicture" class="img-thumbnail">
         </div>
         <div class="col-sm-4 col-md-4">
           <blockquote>
@@ -32,3 +32,14 @@
     <% } %>
   </div>
 </div>
+
+<% if(voting.length !== 0) {%>
+<div id="people-in" class="light-text">
+  <p>Events wich <%= user.username %> voted for:</p>
+  <% for (i=0; i < voting.length; i++) { %>
+    <p>
+      <%= voting[i].event_id.name %>
+    </p>
+    <% } %>
+</div>
+<% } %>

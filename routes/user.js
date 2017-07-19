@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const User = require('../models/User');
 const Event = require('../models/Event');
+const Vote = require('../models/Vote');
 var multer  = require('multer');
 var upload = multer({ dest: './public/profile-uploads/' });
 
@@ -12,11 +13,20 @@ router.get('/:id', (req, res, next) => {
           Event.find({creator_id: user._id})
                .exec()
                .then(events => {
+                 Vote.find({
+                     user_id: user._id
+                   })
+                   .populate('event_id')
+                   .exec(function(err, voting) {
+                     if (err) return handleError(err);
+                     console.log(voting);
                  res.render('user/profile', {
                    user: user,
-                   events: events
+                   events: events,
+                   voting: voting
                  });
                });
+            });
         })
         .catch(e => next(e));
 });
@@ -32,7 +42,7 @@ router.get('/:id/edit', (req, res, next) => {
 
 router.post('/:id/edit', upload.single('photo'), (req, res, next) => {
   let {username, name, password, email} = req.body;
-  let picPath = `profile-uploads/${req.file.filename}`;
+  let picPath = `/profile-uploads/${req.file.filename}`;
       let edits = {
         username,
         name,
