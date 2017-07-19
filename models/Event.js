@@ -9,7 +9,7 @@ const EventSchema = new Schema({
   deadline: { type: Date, required: true },
   creator_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   picPath: String,
-  goal          : { type: Number, required: true },
+  goal          : Number,
   totalPledged  : { type: Number, default: 0 }
 });
 
