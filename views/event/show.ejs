@@ -28,10 +28,10 @@
             pledged of
             <%= events.goal %></span> goal
       </span><br>
-        <% if (user) { %>
-          <button id='vote' <% if(voted){ %> disabled <% } %> class="btn" name="vote"><% if(voted) {%> Thanks for voting <% } else {%>Vote for this event<% } %></button>
-          <% } else { %>
-            <button id='fake-vote' class="btn" name="fake-vote" onclick="window.location.href='/login'">Vote for this event</button>
+      <% if (user) { %>
+        <button id='vote' <% if(voted){ %> disabled <% } %> class="btn" name="vote"><% if(voted) {%> Thanks for voting <% } else {%>Vote for this event<% } %></button>
+        <% } else { %>
+          <button id='fake-vote' class="btn" name="fake-vote" onclick="window.location.href='/login'">Vote for this event</button>
           <% } %>
             <strong class="large-strong"><h2><%= events.timeRemaining.days %></h2></strong><br>
             <span class="light-text"><%= events.timeRemaining.unit  %> to finish.</span><br>
@@ -58,7 +58,7 @@
         </div>
         <script type="text/javascript">
           var eventInfo = <%- JSON.stringify({
-  currentEvent: events,
-  currentUser: user
-  }) %>;
+            currentEvent: events,
+            currentUser: user
+            }) %>;
         </script>

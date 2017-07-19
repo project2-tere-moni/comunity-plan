@@ -33,7 +33,6 @@ router.get('/show/:id', (req, res, next) => {
   Vote.findOne({event_id : req.params.id, user_id : req.user._id })
   .exec()
   .then(vote => {
-    console.log(vote);
     if(vote) {
       voted = true;
     } else {
@@ -57,7 +56,7 @@ router.get('/show/:id', (req, res, next) => {
         });
       })
       .catch(e => next(e));
-});
+    });
 });
 
 router.get('/edit/:id',[ensureLoggedIn('/login'), checkCreator], (req, res, next) => {
