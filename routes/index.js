@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
             .exec()
             .then(places => {
               res.render('index', {
-                title: "index",
+                title: "Home",
                 events: events,
                 places: places
               });

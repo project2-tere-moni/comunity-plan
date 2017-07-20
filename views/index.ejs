@@ -1,41 +1,55 @@
+<!-- Header -->
+<header id="top" class="header">
+    <div class="text-vertical-center">
+        <% if(user){ %>
+        <h1>Welcome <%= user.name %></h1>
+        <% } %>
+        <h1>Common Plans</h1>
+        <p>This is the new platform for the comunity </p>
+        <p>to do those cultural events so everyone </p>
+        <p>can benefit from them, this can be done </p>
+        <p>in our available places listed below</p>
+        <br>
+        <a href="/event/new" class="btn btn-dark btn-lg">Create your event now!</a>
+    </div>
+</header>
 
-<% if(user){ %>
-<h1>Welcome <%= user.name %></h1>
-<% } %>
-
-<div class="jumbotron">
-  <h1>Welcome</h1>
-  <p>This is the new platform for the comunity </p>
-  <p>to do those cultural events so everyone </p>
-  <p>can benefit from them, this can be done </p>
-  <p>in our available places listed below</p>
-  <p><a class="btn btn-primary btn-lg" href="/event/new" role="button">Create your event now!</a></p>
-</div>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 trip-panel" >
-    <h1><a href="/event">Events</a></h1>
-      <% for (i=0; i < events.length; i++) { %>
-        <div class="col-md-6 thumbnail">
-          <img src="<%= events[i].picPath %>" alt="" class="imgEventIndex">
-          <div class="caption">
-            <h3><a href="/event/show/<%= events[i]._id %>"><%= events[i].name %></a></h3>
-            <p><%= events[i].description %></p>
-          </div>
+<!-- Portfolio -->
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h2>Vote this Events now!</h2>
+                <hr class="small">
+                <div class="row">
+                    <% for (i=0; i < events.length; i++) { %>
+                    <div class="col-md-6">
+                        <div class="portfolio-item">
+                            <a href="/event/show/<%= events[i]._id %>">
+                                <img class="img-portfolio img-responsive" src="<%= events[i].picPath %>">
+                            </a>
+                            <h1><%= events[i].name %></h1>
+                            <h3><%= events[i].description %></h3>
+                        </div>
+                    </div>
+                  <% } %>
+                </div>
+                <!-- /.row (nested) -->
+                <a href="/event" class="btn btn-dark">View More Events</a>
+            </div>
+            <!-- /.col-lg-10 -->
         </div>
-      <% } %>
+        <!-- /.row -->
     </div>
-    <div class="col-md-6">
-      <h1><a href="/place">Places Availables</a></h1>
-      <div id="map-intro"></div>
-    </div>
-  </div>
-</div>
-
-
-
-
+    <!-- /.container -->
+</section>
+<section id="map-intro" class="map">
+        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiaRwHqB7k_4QpmPWiPdXWAAutNW_wiC4"></iframe>
+        <br />
+        <small>
+            <a href="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiaRwHqB7k_4QpmPWiPdXWAAutNW_wiC4"></a>
+        </small>
+    </section>
 <script type="text/javascript">
  var myPlaces = <%- JSON.stringify(places) %>;
  </script>

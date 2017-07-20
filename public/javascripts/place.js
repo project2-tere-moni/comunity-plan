@@ -13,15 +13,15 @@ $(document).ready(function(){
        lat: place.location.coordinates[0],
        lng: place.location.coordinates[1]
      };
-     var contentString = '<div id="content">'+
-             '<div id="siteNotice">'+
-             '</div>'+
-             `<h3 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h3>`+
-             '<div id="bodyContent">'+
-             `<img src="${place.picPath}" alt="" width="80">`+
-             `<p>${place.description}</p>`+
-             '</div>'+
-             '</div>';
+     var contentString = '<div id="center">'+
+                           '<div id="thumbnail">'+
+                           `<img src="${place.picPath}" alt="" width="80">`+
+                           '</div>'+
+                           '<div id="caption">'+
+                           `<h3 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h3>`+
+                           `<p>${place.description}</p>`+
+                           '</div>'+
+                          '</div>';
 
      var infowindow = new google.maps.InfoWindow({
        content: contentString,

@@ -60,7 +60,7 @@ router.get('/edit/:id',[ensureLoggedIn('/login'), checkCreator], (req, res, next
     .exec()
     .then(events => {
       res.render('event/edit', {
-        title: 'Edit event',
+        title: 'Edit Event',
         events: events
       });
     })
@@ -91,7 +91,11 @@ router.get('/delete/:id', [ensureLoggedIn('/login'), checkCreator], (req, res, n
   Event.findByIdAndRemove(req.params.id)
         .exec()
         .then(events => {
-          res.redirect("/");
+          Vote.remove({event_id: events._id})
+              .exec()
+              .then(vote =>{
+                res.redirect("/");
+              });
         })
         .catch(e => next(e));
 });

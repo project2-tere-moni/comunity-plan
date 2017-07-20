@@ -19,9 +19,11 @@ router.get('/:id', (req, res, next) => {
                    .populate('event_id')
                    .exec()
                    .then(voting => {
+                     console.log(events);
                      res.render('user/profile', {
                        events: events,
-                       voting: voting
+                       voting: voting,
+                       title: 'Profile'
                      });
                 });
             });
@@ -33,7 +35,7 @@ router.get('/:id/edit', (req, res, next) => {
     User.findById(req.params.id)
         .exec()
         .then( user => {
-          res.render('user/edit');
+          res.render('user/edit', {title: 'Edit Profile'});
         })
         .catch(e => next(e));
 });
