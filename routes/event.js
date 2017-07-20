@@ -1,13 +1,8 @@
 const express = require('express');
-const {
-  ensureLoggedIn,
-  ensureLoggedOut
-} = require('connect-ensure-login');
+const {ensureLoggedIn,ensureLoggedOut} = require('connect-ensure-login');
 const router = express.Router();
 const multer = require('multer');
-const upload = multer({
-  dest: './public/event-uploads/'
-});
+const upload = multer({dest: './public/event-uploads/'});
 const {checkCreator} = require('../config/middlewares');
 const path = require('path');
 const moment = require('moment');
@@ -17,45 +12,46 @@ let Vote = require('../models/Vote');
 
 
 router.get('/', (req, res, next) => {
-  Event.find({})
-    .exec()
-    .then(events => {
-      res.render('event/index', {
-        title: 'All Events',
-        events: events
-      });
-    })
-    .catch(e => next(e));
+  Event.find()
+        .exec()
+        .then(events => {
+          res.render('event/index', {
+            title: 'All Events',
+            events: events
+          });
+        })
+        .catch(e => next(e));
 });
 
-router.get('/show/:id', (req, res, next) => {
+router.get('/show/:id', ensureLoggedIn('/login'), (req, res, next) => {
   let voted;
   Vote.findOne({event_id : req.params.id, user_id : req.user._id })
-  .exec()
-  .then(vote => {
-    if(vote) {
-      voted = true;
-    } else {
-      voted = false;
-    }
-  Event.findById(req.params.id)
-    .exec()
-    .then(events => {
-      Vote.find({
-          event_id: events._id
-        })
-        .populate('user_id')
-        .exec()
-        .then(voting => {
-          res.render('event/show', {
-            title: 'Event Details',
-            events: events,
-            voting: voting,
-            voted: voted
-          });
-        });
-      })
-      .catch(e => next(e));
+      .exec()
+      .then(vote => {
+        voted = vote ? true : false;
+        Event.findById(req.params.id)
+              .exec()
+              .then(events => {
+                Vote.find({
+                    event_id: events._id
+                  })
+                    .populate('user_id')
+                    .exec()
+                    .then(voting => {
+                      Event.find()
+                            .exec()
+                            .then(allEvents => {
+                              res.render('event/show', {
+                                title: 'Event Details',
+                                events: events,
+                                allEvents: allEvents,
+                                voting: voting,
+                                voted: voted
+                              });
+                      });
+                });
+          })
+        .catch(e => next(e));
     });
 });
 
@@ -84,32 +80,32 @@ router.post('/edit/:id', [ensureLoggedIn('/login'), upload.single('photo')], (re
   if (req.file) updates.picPath = `/event-uploads/${req.file.filename}`;
 
   Event.findByIdAndUpdate(req.params.id, updates)
-    .exec()
-    .then(events => {
-      res.redirect(`/event/show/${events._id}`);
-    })
-    .catch(e => next(e));
+        .exec()
+        .then(events => {
+          res.redirect(`/event/show/${events._id}`);
+        })
+        .catch(e => next(e));
 });
 
 router.get('/delete/:id', [ensureLoggedIn('/login'), checkCreator], (req, res, next) => {
   Event.findByIdAndRemove(req.params.id)
-    .exec()
-    .then(events => {
-      res.redirect("/");
-    })
-    .catch(e => next(e));
+        .exec()
+        .then(events => {
+          res.redirect("/");
+        })
+        .catch(e => next(e));
 });
 
 router.get('/new', ensureLoggedIn('/login'), (req, res, next) => {
-  Event.find({})
-    .exec()
-    .then(events => {
-      res.render('event/new', {
-        title: 'New Event',
-        events: events
-      });
-    })
-    .catch(e => next(e));
+  Event.find()
+        .exec()
+        .then(events => {
+          res.render('event/new', {
+            title: 'New Event',
+            events: events
+          });
+        })
+        .catch(e => next(e));
 });
 
 router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, res, next) => {
@@ -123,10 +119,10 @@ router.post('/new', [ensureLoggedIn('/login'), upload.single('photo')], (req, re
     goal: 50,
   });
   newEvent.save()
-    .then(() => {
-      res.redirect(`/event/show/${newEvent._id}`);
-    })
-    .catch(e => next(e));
+          .then(() => {
+            res.redirect(`/event/show/${newEvent._id}`);
+          })
+          .catch(e => next(e));
 });
 
 module.exports = router;

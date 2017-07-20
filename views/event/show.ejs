@@ -62,3 +62,18 @@
             currentUser: user
             }) %>;
         </script>
+
+
+        <div class="row">
+          <div class="col-sm-6 col-md-4 trip-panel" >
+            <% for (i=0; i < allEvents.length; i++) { %>
+              <div class="thumbnail">
+                <img src="<%= allEvents[i].picPath %>" alt="">
+                <div class="caption">
+                  <h3><a href="/event/show/<%= allEvents[i]._id %>"><%= allEvents[i].name %></a></h3>
+                  <p><%= allEvents[i].description %></p>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </div>

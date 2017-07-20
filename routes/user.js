@@ -20,7 +20,6 @@ router.get('/:id', (req, res, next) => {
                    .exec()
                    .then(voting => {
                      res.render('user/profile', {
-                       user: user,
                        events: events,
                        voting: voting
                      });
@@ -34,7 +33,7 @@ router.get('/:id/edit', (req, res, next) => {
     User.findById(req.params.id)
         .exec()
         .then( user => {
-          res.render('user/edit', {user: user});
+          res.render('user/edit');
         })
         .catch(e => next(e));
 });
