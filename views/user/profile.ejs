@@ -1,4 +1,4 @@
-<div class="main-header">
+<div class="container main-header">
   <div class="intro">
       <div class="container text-center">
           <img class="img-thumbnail" src="<%= user.picPath %>" alt="" width="140">
@@ -19,42 +19,54 @@
   </div><!--//contact-info-->
 </div>
 
-<section id="portfolio" class="portfolio">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">
-                <h2>Events <%= user.username %> created:</h2>
-                <hr class="small">
-                <div class="row">
-                    <% for (i=0; i < events.length; i++) { %>
-                    <div class="col-md-6">
-                        <div class="portfolio-item">
-                            <a href="/event/show/<%= events[i]._id %>">
-                                <img class="img-portfolio img-responsive" src="<%= events[i].picPath %>">
-                            </a>
-                            <h1><%= events[i].name %></h1>
-                            <h3><%= events[i].description %></h3>
-                        </div>
-                    </div>
-                  <% } %>
-                </div>
-                <!-- /.row (nested) -->
-                <a href="/event" class="btn btn-dark">View More Events</a>
-            </div>
-            <!-- /.col-lg-10 -->
+<div class="col-lg-6 col-sm-6">
+    <div id="main-button" class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+            <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <div class="hidden-xs">Created</div>
+            </button>
         </div>
-        <!-- /.row -->
+        <div class="btn-group" role="group">
+            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                <div class="hidden-xs">Voted</div>
+            </button>
+        </div>
     </div>
-    <!-- /.container -->
-</section>
+        <div class="well">
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab1">
+          <% for (i=0; i < events.length; i++) { %>
+            <div class="item frontend col-md-3 col-xs-6 ">
+                <div class="item-inner">
+                    <figure class="figure">
+                          <img class="img-portfolio img-responsive" src="<%= events[i].picPath %>">
+                    </figure>
+                    <div class="content text-left">
+                      <h1><%= events[i].name %></h1>
+                    </div><!--//content-->
+                    <a class="link-mask" href="/event/show/<%= events[i]._id %>"></a>
+                </div><!--//item-inner-->
+            </div><!--//item-->
+          <% } %>
+        </div>
+        <div class="tab-pane fade in" id="tab2">
+          <% if(voting.length !== 0) {%>
+            <% for (i=0; i < voting.length; i++) { %>
+              <div class="item frontend col-md-3 col-xs-6 ">
+                  <div class="item-inner">
+                      <figure class="figure">
+                            <img class="img-portfolio img-responsive" src="<%= voting[i].event_id.picPath %>">
+                      </figure>
+                      <div class="content text-left">
+                        <h1><%= voting[i].event_id.name %></h1>
+                      </div><!--//content-->
+                      <a class="link-mask" href="/event/show/<%= voting[i].event_id._id %>"></a>
+                  </div><!--//item-inner-->
+              </div><!--//item-->
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    </div>
 
-<% if(voting.length !== 0) {%>
-<div id="people-in" class="light-text">
-  <p>Events wich <%= user.username %> voted for:</p>
-  <% for (i=0; i < voting.length; i++) { %>
-    <p>
-      <%= voting[i].event_id.name %>
-    </p>
-    <% } %>
-</div>
-<% } %>
+    </div>

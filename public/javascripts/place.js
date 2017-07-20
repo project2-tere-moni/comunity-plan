@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  function initialize() {
   var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
       center: {lat: 40.417080, lng: -3.703612},
@@ -32,4 +33,15 @@ $(document).ready(function(){
      pin.addListener('click', ()=>{infowindow.open(map, pin);});
      markers.push(pin);
    });
+
+   //Resize Function
+		google.maps.event.addDomListener(window, "resize", function() {
+			var center = map.getCenter();
+			google.maps.event.trigger(map, "resize");
+			map.setCenter(center);
+		});
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
 });

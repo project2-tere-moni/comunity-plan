@@ -4,6 +4,36 @@ body {
   color: #00B7FF;
 }
 
+@media (max-width: @screen-xs-max) {
+  html {
+    font-size: 4px;
+  }
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  html {
+    font-size: 5px;
+  }
+}
+Small devices (tablets, 768px and up)
+@media (min-width: @screen-sm-min) {
+  html {
+    font-size: 10px;
+  }
+ }
+Medium devices (desktops, 992px and up)
+@media (min-width: @screen-md-min) {
+  html {
+    font-size: 14px;
+  }
+}
+
+Large devices (large desktops, 1200px and up)
+@media (min-width: @screen-lg-min) {
+  html {
+    font-size: 14px;
+  }
+}
+
 a {
   color: #00B7FF;
 }
@@ -68,4 +98,17 @@ h1#events {
 
 .text-vertical-center p{
   font-size: 50px;
+}
+
+/* USER PROFILE PAGE */
+.well {
+  height: 100vh;
+  width: 98vw;
+}
+.btn-pref .btn {
+    -webkit-border-radius:0 !important;
+}
+
+#main-button {
+    width: 98vw;
 }
