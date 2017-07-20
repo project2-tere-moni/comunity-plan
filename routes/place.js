@@ -7,7 +7,10 @@ router.get('/', (req, res, next) => {
     Place.find()
          .exec()
          .then(places => {
-           res.render('place/index', {places: places});
+           res.render('place/index', {
+             places: places,
+             title: 'Places'
+           });
          })
          .catch(e => nect(e));
 });

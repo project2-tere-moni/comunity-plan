@@ -11,7 +11,8 @@ const User = require("../models/User");
 
 router.get('/login', ensureLoggedOut(), (req, res) => {
   res.render('auth/login', {
-    message: req.flash('error')
+    message: req.flash('error'),
+    title: 'Login'
   });
 });
 
@@ -22,7 +23,10 @@ router.post('/login', ensureLoggedOut(), passport.authenticate('local-login', {
 }));
 
 router.get('/signup', ensureLoggedOut(), (req, res) => {
-    res.render('auth/signup', { message: req.flash('error')});
+    res.render('auth/signup', {
+       message: req.flash('error'),
+       title: 'Signup'
+     });
 });
 
 router.post('/signup', [ensureLoggedOut(), upload.single('photo')],passport.authenticate('local-signup', {

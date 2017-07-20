@@ -1,37 +1,54 @@
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+<div class="profile">
+  <div class="intro">
+      <div class="container text-center">
+          <img class="img-thumbnail" src="<%= user.picPath %>" alt="" width="140">
+          <h1 class="name"><%= user.name %></h1>
+          <div class="title"><p><%= user.username %></p></div>
+          <div class="profile">
+              <p>Profile info goes here. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet.</p>
+          </div><!--//profile-->
+      </div><!--//container-->
+  </div><!--//intro-->
 
+  <div class="contact-info">
+      <div class="container text-center">
+          <ul class="list-inline">
+              <li class="email"><i class="fa fa-envelope"></i><a href="mailto: <%= user.email %>"><%= user.email %></a></li>
+              <li><i class="fa fa-phone"></i> <a href="tel: 0123456789">0123 456 7890</a></li>
+              <li class="website"><i class="fa fa-globe"></i><a href="#" target="_blank">portfoliosite.com</a></li>
+          </ul>
+      </div><!--//container-->
+  </div><!--//contact-info-->
+</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-2 col-md-2">
-          <img src="<%= user.picPath %>" alt="profilePicture" class="img-thumbnail">
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <h2>Events <%= user.username %> created:</h2>
+                <hr class="small">
+                <div class="row">
+                    <% for (i=0; i < events.length; i++) { %>
+                    <div class="col-md-6">
+                        <div class="portfolio-item">
+                            <a href="/event/show/<%= events[i]._id %>">
+                                <img class="img-portfolio img-responsive" src="<%= events[i].picPath %>">
+                            </a>
+                            <h1><%= events[i].name %></h1>
+                            <h3><%= events[i].description %></h3>
+                        </div>
+                    </div>
+                  <% } %>
+                </div>
+                <!-- /.row (nested) -->
+                <a href="/event" class="btn btn-dark">View More Events</a>
+            </div>
+            <!-- /.col-lg-10 -->
         </div>
-        <div class="col-sm-4 col-md-4">
-          <blockquote>
-              <p><%= user.username %></p>
-              <p><%= user.name %></p>
-          </blockquote>
-          <p> <i class="glyphicon glyphicon-envelope"><%= user.email %></i></p>
-      </div>
+        <!-- /.row -->
     </div>
-</div>
-
-
-<div class="row">
-  <h1>Events</h1>
-  <div class="col-sm-6 col-md-4 trip-panel" >
-    <% for (i=0; i < events.length; i++) { %>
-      <div class="thumbnail">
-        <img src="<%= events[i].picPath %>" alt="">
-        <div class="caption">
-          <h3><a href="/event/show/<%= events[i]._id %>"><%= events[i].name %></a></h3>
-          <p><%= events[i].description %></p>
-        </div>
-      </div>
-    <% } %>
-  </div>
-</div>
+    <!-- /.container -->
+</section>
 
 <% if(voting.length !== 0) {%>
 <div id="people-in" class="light-text">
