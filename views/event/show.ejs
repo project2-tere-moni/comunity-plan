@@ -1,61 +1,66 @@
-<h1><%= title %></h1>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-2">
 
-    </div>
-    <div class="col-sm-10">
-      <h1><%= events.name %></h1>
-      <p>
-        <%= events.description %>
-      </p>
-      <p>
-        <%= events.goal %>
-      </p>
-      </blockquote>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-8">
-      <img src="<%= events.picPath %>" alt="placePicture" class="img-thumbnail">
-    </div>
-    <div class="col-sm-4">
-      <progress value="<%= events.totalPledged %>" max="<%= events.goal %>"></progress>
-      <h2 class="total"><%= events.totalPledged %></h2><br>
-      <span class="light-text">
-            pledged of
-            <%= events.goal %></span> goal
-      </span><br>
-      <% if (user) { %>
-        <button id='vote' <% if(voted){ %> disabled <% } %> class="btn" name="vote"><% if(voted) {%> Thanks for voting <% } else {%>Vote for this event<% } %></button>
-        <% } else { %>
-          <button id='fake-vote' class="btn" name="fake-vote" onclick="window.location.href='/login'">Vote for this event</button>
-          <% } %>
-            <strong class="large-strong"><h2><%= events.timeRemaining.days %></h2></strong><br>
-            <span class="light-text"><%= events.timeRemaining.unit  %> to finish.</span><br>
-            <% if(voting.length !== 0) {%>
-              <div id="people-in" class="light-text">
-                People who voted this event:
-                <% for (i=0; i < voting.length; i++) { %>
-                  <p>
-                    <%= voting[i].user_id.username %>
-                  </p>
-                  <% } %>
-              </div>
-              <% } %>
-    </div>
+<!-- Portfolio Item Heading -->
+<div class="row">
+  <div class="col-lg-12">
+      <h1 class="page-header"><%= events.name %>
+          <small>Event Details</small>
+      </h1>
   </div>
 </div>
+
+  <div class="row">
+    <div class="col-sm-8 box2">
+      <img src="<%= events.picPath %>" alt="placePicture" class="img-thumbnail">
+    </div>
+    <div class="col-sm-4 vote-column">
+      <progress value="<%= events.totalPledged %>" max="<%= events.goal %>"></progress>
+      <h2 class="total"><%= events.totalPledged %></h2><br>
+      <h4 class="light-text">
+            pledged of
+            <span><%= events.goal %></span> goal</h4>
+
+      <% if (user) { %>
+        <button id='vote' <% if(voted){ %> disabled <% } %> class="btn btn-info btn-lg" name="vote"><% if(voted) {%> Thanks for voting <% } else {%>Vote for this event<% } %></button>
+        <% } else { %>
+        <button id='fake-vote' class="btn btn-info btn-lg" name="fake-vote" onclick="window.location.href='/login'">Vote for this event</button>
+        <% } %>
+        <div class="time-box">
+        <h4><span class="large-strong"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <%= events.timeRemaining.days %></span>
+        <%= events.timeRemaining.unit  %> to finish</h4>
+        </div>
+        <hr>
+        <p><%= events.description %></p>
+    </div>
+  </div>
+  <div class="row people-box">
+    <div class="col-sm-8">
+    <% if(voting.length !== 0) {%>
+    <div id="people-in" class="light-text">
+    <h4>People who voted this event:</h4>
+    <% for (i=0; i < voting.length; i++) { %>
+    <p>
+    <button class="btn btn-default"><%= voting[i].user_id.username %></button>
+  </p>
+  <% } %>
+</div>
+<% } %>
+
+</div>
+  </div>
+
 <% if (user) { %>
   <% if((user._id).toString() == (events.creator_id).toString()){ %>
-    <a class="btn backer-btn" href="/event/edit/<%= events._id %>">Edit this event</a><br>
-    <a class="btn backer-btn" href="/event/delete/<%= events._id %>">Delete this event</a><br>
+    <nav aria-label="...">
+  <ul class="pager">
+    <li><a href=href="/event/edit/<%= events._id %>">Edit</a></li>
+    <li><a href="/event/delete/<%= events._id %>">Delete</a></li>
+  </ul>
+</nav>
     <% } %>
       <% } %>
-        <a class="btn backer-btn" href="/event">View all events</a>
-        </div>
+
         <script type="text/javascript">
           var eventInfo = <%- JSON.stringify({
             currentEvent: events,
@@ -63,17 +68,18 @@
             }) %>;
         </script>
 
-
-        <div class="row">
-          <div class="col-sm-6 col-md-4 trip-panel" >
-            <% for (i=0; i < allEvents.length; i++) { %>
-              <div class="thumbnail">
-                <img src="<%= allEvents[i].picPath %>" alt="">
-                <div class="caption">
-                  <h3><a href="/event/show/<%= allEvents[i]._id %>"><%= allEvents[i].name %></a></h3>
-                  <p><%= allEvents[i].description %></p>
-                </div>
-              </div>
-            <% } %>
+      <div class="row">
+          <div class="col-lg-12">
+              <h3 class="page-header">Other Events</h3>
           </div>
-        </div>
+          <% for (i=0; i < allEvents.length; i++) { %>
+          <div class="col-sm-3 col-xs-6">
+              <a class="box3" href="/event/show/<%= allEvents[i]._id %>">
+                  <img class="img-responsive portfolio-item" src="<%= allEvents[i].picPath %>" alt="">
+              </a>
+              <h3><a href="/event/show/<%= allEvents[i]._id %>"><%= allEvents[i].name %></a></h3>
+              <p><%= allEvents[i].description %></p>
+          </div>
+        <% } %>
+      </div>
+</div>

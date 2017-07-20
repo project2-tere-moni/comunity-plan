@@ -1,0 +1,84 @@
+/*!
+ * Start Bootstrap - Portfolio Item (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.box {
+  width: 455px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.box img {
+  max-width: 455px;
+  position: absolute;
+  bottom: 0;
+}
+
+.box2 {
+  width: 780px;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.box2 img {
+  max-width: 780px;
+  position: absolute;
+  bottom: 0;
+}
+
+.box3 {
+  width: 262.5px;
+  height: 176px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+
+.box3 img {
+  max-width: 262.5px;
+  position: absolute;
+  bottom: 0;
+}
+
+.vote-column {
+  padding-left: 70px;
+}
+
+.btn-info {
+  margin-top: 20px;
+}
+
+h4 span {
+  font-size: 22px;
+}
+
+.time-box {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.people-box {
+  margin-top: 30px;
+}
+
+.btn-default {
+  background-image: none;
+}

@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
         .exec()
         .then(events => {
           res.render('event/index', {
-            title: 'All Events',
+            title: 'Proposed events',
             events: events
           });
         })
