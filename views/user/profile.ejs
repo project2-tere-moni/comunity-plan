@@ -16,7 +16,7 @@
   </div><!--//contact-info-->
 </div>
 
-<div class="col-lg-6 col-sm-6 container">
+<div class="col-lg-12 col-sm-6 container">
     <div id="main-button" class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
             <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -29,11 +29,11 @@
             </button>
         </div>
     </div>
-        <div class="well">
+        <div class="container profile-events">
       <div class="tab-content">
         <div class="tab-pane fade in active" id="tab1">
           <% for (i=0; i < events.length; i++) { %>
-            <div class="item frontend col-md-3 col-xs-6 size">
+            <div class="item frontend col-sm-3 col-xs-6  size-profile">
                 <div class="item-inner">
                     <figure class="figure">
                       <a href="/event/show/<%= events[i]._id %>">
