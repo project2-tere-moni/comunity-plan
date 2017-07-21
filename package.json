@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=comunity-plan:* nodemon ./bin/www",
-    "start": "node bin/www"
+    "start": "node ./bin/www",
+    "dev": "DEBUG=*:* nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
