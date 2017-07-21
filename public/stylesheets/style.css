@@ -3,6 +3,18 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #00B7FF;
 }
+.size {
+  width: 400px;
+  height: 400px;
+}
+.size-events {
+  width: 500px;
+  height: 500px;
+}
+.size-show {
+  width: 260px;
+  height: 260px;
+}
 
 a {
   color: #00B7FF;
