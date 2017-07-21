@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "DEBUG=comunity-plan:* nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "start": "node bin/www"
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
