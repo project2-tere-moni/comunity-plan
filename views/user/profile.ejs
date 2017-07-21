@@ -3,9 +3,9 @@
       <div class="container text-center">
           <img class="img-thumbnail" src="<%= user.picPath %>" alt="" width="140">
           <h1 class="name"><%= user.name %></h1>
-          <div class="title"><p><%= user.username %></p></div>
+          <div class="name"><p>@<%= user.username %></p></div>
           <div class="profile">
-              <p>Profile info goes here. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet.</p>
+              <p>I currently serve as office manager for a busy financial services firm (XYZ Company), where I supervise a team of 12 employees and coordinate all office functions. My strengths in improving office systems and building a top-performing clerical team have earned repeated commendations and formal recognition from the company CEO.</p>
           </div><!--//profile-->
       </div><!--//container-->
   </div><!--//intro-->
@@ -39,12 +39,13 @@
             <div class="item frontend col-md-3 col-xs-6 ">
                 <div class="item-inner">
                     <figure class="figure">
+                      <a href="/event/show/<%= events[i]._id %>">
                           <img class="img-portfolio img-responsive" src="<%= events[i].picPath %>">
+                      </a>
                     </figure>
                     <div class="content text-left">
-                      <h1><%= events[i].name %></h1>
+                      <h3><%= events[i].name %></h3>
                     </div><!--//content-->
-                    <a class="link-mask" href="/event/show/<%= events[i]._id %>"></a>
                 </div><!--//item-inner-->
             </div><!--//item-->
           <% } %>
@@ -55,12 +56,13 @@
               <div class="item frontend col-md-3 col-xs-6 ">
                   <div class="item-inner">
                       <figure class="figure">
+                        <a href="<%= voting[i].event_id._id %>">
                             <img class="img-portfolio img-responsive" src="<%= voting[i].event_id.picPath %>">
+                        </a>
                       </figure>
                       <div class="content text-left">
-                        <h1><%= voting[i].event_id.name %></h1>
+                        <h3><%= voting[i].event_id.name %></h3>
                       </div><!--//content-->
-                      <a class="link-mask" href="/event/show/<%= voting[i].event_id._id %>"></a>
                   </div><!--//item-inner-->
               </div><!--//item-->
             <% } %>

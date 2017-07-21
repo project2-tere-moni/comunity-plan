@@ -1,6 +1,8 @@
-<div class="main-header">
-  <h1 class="center text-header" id="events"><%= events.name %></h1>
-  <h3 class="text-header"><%= title %></h3>
+<div class="row main-header">
+    <div class="col-lg-12">
+        <h1 class="title"><%= title %>
+        </h1>
+    </div>
 </div>
 <div class="container">
 <!-- Portfolio Item Heading -->
@@ -56,7 +58,7 @@
   <% if((user._id).toString() == (events.creator_id).toString()){ %>
     <nav aria-label="...">
   <ul class="pager">
-    <li><a href=href="/event/edit/<%= events._id %>">Edit</a></li>
+    <li><a href="/event/edit/<%= events._id %>">Edit</a></li>
     <li><a href="/event/delete/<%= events._id %>">Delete</a></li>
   </ul>
 </nav>
@@ -80,7 +82,6 @@
                   <img class="img-responsive portfolio-item" src="<%= allEvents[i].picPath %>" alt="">
               </a>
               <h3><a href="/event/show/<%= allEvents[i]._id %>"><%= allEvents[i].name %></a></h3>
-              <p><%= allEvents[i].description %></p>
           </div>
         <% } %>
       </div>

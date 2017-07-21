@@ -37,25 +37,25 @@ header#top, .main-header {
 }
 
 .main-header {
-  text-align: center;
   padding: 10px;
   height: 350px;
   margin-bottom: 10px;
   color: white;
 }
 
-.one-line-text {
-  padding-top: 100px;
+.title {
+  position: absolute;
+  top: 250px;
+  left: 150px;
+}
+h1 small {
+  color: white;
 }
 
-h1#events {
-  padding-top: 55px;
-}
+
 
 .text-header {
-  font-size: 65px;
   text-transform: uppercase;
-  font-family: monospace;
 }
 
 .text-vertical-center {
@@ -85,7 +85,7 @@ font-size:14px;
 font-size:14px;
 }
 .title{
-font-size:22px;
+font-size:30px;
 }
 }
 
@@ -97,7 +97,7 @@ font-size:12px;
 font-size:12px;
 }
 .title{
-font-size:18px;
+font-size:50px;
 }
 }
 /* Por debajo de 400px */(
