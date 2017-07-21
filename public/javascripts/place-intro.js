@@ -1,7 +1,9 @@
 $(document).ready(function(){
+  function initialize() {
   var map = new google.maps.Map(document.getElementById('map-intro'), {
       zoom: 11,
-      center: {lat: 40.417080, lng: -3.703612}
+      center: {lat: 40.417080, lng: -3.703612},
+      scrollwheel: false
     });
     var geocoder = new google.maps.Geocoder();
 
@@ -13,21 +15,32 @@ $(document).ready(function(){
        lat: place.location.coordinates[0],
        lng: place.location.coordinates[1]
      };
-     var contentString = '<div id="content">'+
-             '<div id="siteNotice">'+
-             '</div>'+
-             `<h3 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h3>`+
-             '<div id="bodyContent">'+
-             `<img src="${place.picPath}" alt="" width="80">`+
-             `<span>${place.description}</span>`+
-             '</div>'+
-             '</div>';
+     var contentString = '<div class="center">'+
+                           '<div id="thumbnail">'+
+                           `<img src="${place.picPath}" alt="" width="80">`+
+                           '</div>'+
+                           '<div id="caption">'+
+                           `<h3 id="firstHeading" class="firstHeading">Place ID: ${place.place_id}</h3>`+
+                           `<p>${place.description}</p>`+
+                           '</div>'+
+                          '</div>';
 
      var infowindow = new google.maps.InfoWindow({
-       content: contentString
+       content: contentString,
+      maxWidth: 200
      });
      var pin = new google.maps.Marker({ position, map, place_id  });
      pin.addListener('click', ()=>{infowindow.open(map, pin);});
      markers.push(pin);
    });
+
+   //Resize Function
+   google.maps.event.addDomListener(window, "resize", function() {
+     var center = map.getCenter();
+     google.maps.event.trigger(map, "resize");
+     map.setCenter(center);
+   });
+ }
+
+ google.maps.event.addDomListener(window, 'load', initialize);
 });

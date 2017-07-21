@@ -1,7 +1,9 @@
 $(document).ready(function(){
+  function initialize() {
   var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 12,
-      center: {lat: 40.417080, lng: -3.703612}
+      center: {lat: 40.417080, lng: -3.703612},
+      scrollwheel: false
     });
     var geocoder = new google.maps.Geocoder();
 
@@ -13,7 +15,7 @@ $(document).ready(function(){
        lat: place.location.coordinates[0],
        lng: place.location.coordinates[1]
      };
-     var contentString = '<div id="center">'+
+     var contentString = '<div class="center">'+
                            '<div id="thumbnail">'+
                            `<img src="${place.picPath}" alt="" width="80">`+
                            '</div>'+
@@ -31,4 +33,15 @@ $(document).ready(function(){
      pin.addListener('click', ()=>{infowindow.open(map, pin);});
      markers.push(pin);
    });
+
+   //Resize Function
+		google.maps.event.addDomListener(window, "resize", function() {
+			var center = map.getCenter();
+			google.maps.event.trigger(map, "resize");
+			map.setCenter(center);
+		});
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
 });
