@@ -4,36 +4,6 @@ body {
   color: #00B7FF;
 }
 
-@media (max-width: @screen-xs-max) {
-  html {
-    font-size: 4px;
-  }
-}
-@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-  html {
-    font-size: 5px;
-  }
-}
-Small devices (tablets, 768px and up)
-@media (min-width: @screen-sm-min) {
-  html {
-    font-size: 10px;
-  }
- }
-Medium devices (desktops, 992px and up)
-@media (min-width: @screen-md-min) {
-  html {
-    font-size: 14px;
-  }
-}
-
-Large devices (large desktops, 1200px and up)
-@media (min-width: @screen-lg-min) {
-  html {
-    font-size: 14px;
-  }
-}
-
 a {
   color: #00B7FF;
 }
@@ -60,7 +30,7 @@ a {
   width: 140px;
 }
 
-#top, .main-header {
+header#top, .main-header {
   background-image: url(/images/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -92,13 +62,6 @@ h1#events {
   color: white;
 }
 
-.text-vertical-center h1{
-  font-size: 100px;
-}
-
-.text-vertical-center p{
-  font-size: 50px;
-}
 
 /* USER PROFILE PAGE */
 .well {
@@ -111,4 +74,41 @@ h1#events {
 
 #main-button {
     width: 98vw;
+}
+
+/* Por debajo de 700px */(
+@media screen and (min-width: 700px){
+.content{
+font-size:14px;
+}
+.content p{
+font-size:14px;
+}
+.title{
+font-size:22px;
+}
+}
+
+@media screen and (max-width: 500px){
+.content{
+font-size:12px;
+}
+.content p{
+font-size:12px;
+}
+.title{
+font-size:18px;
+}
+}
+/* Por debajo de 400px */(
+@media screen and (max-width: 600px){
+.content{
+font-size:10px;
+}
+.content p{
+font-size:12px;
+}
+.title{
+font-size:16px;
+}
 }
