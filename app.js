@@ -12,7 +12,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const MongoStore = require('connect-mongo')(session);
 const moment = require('moment');
-const debug = require('debug')(`comunityplan:${path.basename(__filename).split('.')[0]}`);
+const debug = require('debug')(`comunity-plan:${path.basename(__filename).split('.')[0]}`);
 
 const index = require('./routes/index');
 const user = require('./routes/user');
